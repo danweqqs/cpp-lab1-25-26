@@ -6,7 +6,6 @@
 #include <fstream>
 #include <sstream>
 
-
 using namespace std;
 
 class CreatePoint {
@@ -42,16 +41,24 @@ CreatePoint readPointsFromFile(const string& filename) {
   }
 
   int n;
-  file >> n;
+  if(!(file >> n)){
+    cerr << "The input error" << endl;
+  }
 
   double x0, y0;
-  file >> x0 >> y0;
+  if(!(file >> x0 >> y0)){
+    cerr << "The input error" << endl;
+  }
 
   vector<pair<double, double>> bases;
   double x_b, y_b;
   while (file >> x_b >> y_b) {
     bases.push_back({x_b, y_b});
   }
+
+  if (bases.empty()) {
+        cerr << "Error: base points are not found." << endl;
+    }
 
   file.close();
   return CreatePoint({x0, y0}, bases);
