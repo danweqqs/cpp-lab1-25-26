@@ -9,7 +9,6 @@ private:
     std::vector<std::pair<double, double>> pointsOfPlane;
     std::mt19937 rng;
     std::uniform_int_distribution<> randomIndex;
-
 public:
     CreatePoint(std::pair<double, double> start, std::vector<std::pair<double, double>> points)
         : currentPoint(start), pointsOfPlane(points),
@@ -26,6 +25,14 @@ public:
 
     const std::vector<std::pair<double, double>> getBasePoints() const {
         return pointsOfPlane;
+    }
+
+    std::pair<double, double> operator()() {
+        int i = randomIndex(rng);
+        std::pair<double, double> bk = pointsOfPlane[i];
+        currentPoint.first = (bk.first + currentPoint.first) / 2.0;
+        currentPoint.second = (bk.second + currentPoint.second) / 2.0;
+        return currentPoint;
     }
 };
 
