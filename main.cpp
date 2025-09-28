@@ -1,41 +1,63 @@
-#include "main.h"
 #include <iostream>
 #include <vector>
-#include <stdexcept>
 #include <random>
 #include <fstream>
 
-using namespace std;
-
 class CreatePoint {
 private:
-  pair<double, double> currentPoint;
-  vector<pair<double, double>> pointsOfPlane;
+  std::pair<double, double> currentPoint;
+  std::vector<std::pair<double, double>> pointsOfPlane;
+  std::mt19937 rng;
+  std::uniform_int_distribution<> randomIndex;
 
 public:
-  CreatePoint(pair<double, double> start, vector<pair<double, double>> points)
-      : currentPoint(start), pointsOfPlane(points) {
-    try {
-      if (pointsOfPlane.empty()) {
-        throw invalid_argument("the list is empty");
-      }
-    } catch (const invalid_argument &e) {
-      cerr << "error in CreatePoint constructor:  " << e.what() << endl;
-    }
+  CreatePoint(std::pair<double, double> start, std::vector<std::pair<double, double>> points)
+      : currentPoint(start), pointsOfPlane(points),
+        rng(std::random_device{}()), randomIndex(0, pointsOfPlane.empty() ? 0 : pointsOfPlane.size() - 1) {
   }
 
-  pair<double, double> getCurrent() const {
+  bool hasBasePoints() const {
+    return !pointsOfPlane.empty();
+  }
+
+  std::pair<double, double> getCurrent() const {
     return currentPoint;
   }
 
-  const vector<pair<double, double>> getBasePoints() const {
+  const std::vector<std::pair<double, double>> getBasePoints() const {
     return pointsOfPlane;
   }
-
-  bool empty() const {
-    return pointsOfPlane.empty();
-  }
 };
+
+CreatePoint readPointsFromFile(const std::string& filename) {
+  std::ifstream file(filename);
+  if (!file.is_open()) {
+    std::cerr << "The opening file error: " << filename << std::endl;
+  }
+
+  int n;
+  if (!(file >> n)) {
+    std::cerr << "The input error" << std::endl;
+  }
+
+  double x0, y0;
+  if (!(file >> x0 >> y0)) {
+    std::cerr << "The input error" << std::endl;
+  }
+
+  std::vector<std::pair<double, double>> bases;
+  double x_b, y_b;
+  while (file >> x_b >> y_b) {
+    bases.push_back({x_b, y_b});
+  }
+
+  if (bases.empty()) {
+    std::cerr << "Error: base points are not found." << std::endl;
+  }
+
+  file.close();
+  return CreatePoint({x0, y0}, bases);
+}
 
 int main() {
   return 0;
