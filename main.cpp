@@ -36,13 +36,12 @@ public:
     }
 };
 
-CreatePoint readPointsFromFile(const std::string& filename) {
+CreatePoint readPointsFromFile(const std::string& filename, int& n) {
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "The opening file error: " << filename << std::endl;
     }
 
-    int n;
     if (!(file >> n)) {
         std::cerr << "The input error" << std::endl;
     }
@@ -80,13 +79,13 @@ int main(int argc, char* argv[]) {
     CreatePoint create_point = readPointsFromFile(inputFile, n);
 
     if (n <= 0 || !create_point.hasBasePoints()) {
-        return 0;
+        return 1;
     }
 
     std::ofstream outFile(outputFile);
     if (!outFile.is_open()) {
         std::cerr << "Error: cannot open output file\n";
-        return 0;
+        return 1;
     }
 
     for (int i = 0; i < n; ++i) {
