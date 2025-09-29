@@ -66,6 +66,33 @@ CreatePoint readPointsFromFile(const std::string& filename) {
     return CreatePoint({x0, y0}, bases);
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+
+    if (argc != 3) {
+        std::cerr << "Wrong number of arguments!\n";
+        return 0;
+    }
+
+    std::string inputFile = argv[1];
+    std::string outputFile = argv[2];
+
+    int n;
+    CreatePoint create_point = readPointsFromFile(inputFile, n);
+
+    if (n <= 0 || !create_point.hasBasePoints()) {
+        return 0;
+    }
+
+    std::ofstream outFile(outputFile);
+    if (!outFile.is_open()) {
+        std::cerr << "Error: cannot open output file\n";
+        return 0;
+    }
+
+    for (int i = 0; i < n; ++i) {
+        auto pt = create_point();
+        outFile << pt.first << " " << pt.second << "\n";
+    }
+
     return 0;
 }

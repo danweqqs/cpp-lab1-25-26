@@ -21,6 +21,11 @@
 		{
 			"isCMake" : true,
 			"isExternal" : true,
+			"path" : "C:/Program Files/JetBrains/CLion 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeMinGWFindMake.cmake"
+		},
+		{
+			"isCMake" : true,
+			"isExternal" : true,
 			"path" : "C:/Program Files/JetBrains/CLion 2024.3.5/bin/cmake/win/x64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake"
 		},
 		{
@@ -817,8 +822,8 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
-		"build" : "C:/\u0421++/labs/labs1/cmake-build-debug",
-		"source" : "C:/\u0421++/labs/labs1"
+		"build" : "C:/\u0421++/cpp-lab1-25-26/cmake-build-debug",
+		"source" : "C:/\u0421++/cpp-lab1-25-26"
 	},
 	"version" : 
 	{
