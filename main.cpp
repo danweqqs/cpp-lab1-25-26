@@ -1,3 +1,4 @@
+// Compiler: Apple Clang 16.0.0 (clang-1600.0.26.3)
 #include <iostream>
 #include <fstream>
 #include <vector>
