@@ -22,14 +22,6 @@ public:
         return !pointsOfPlane.empty();
     }
 
-    std::pair<double, double> getCurrent() const {
-        return currentPoint;
-    }
-
-    const std::vector<std::pair<double, double>> getBasePoints() const {
-        return pointsOfPlane;
-    }
-
     std::pair<double,double> operator()() {
         auto cur = currentPoint;
         if (!pointsOfPlane.empty()) {
