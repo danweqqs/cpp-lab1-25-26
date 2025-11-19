@@ -1,0 +1,3 @@
+C:/С++/labs3/cmake-build-debug/CMakeFiles/labs3.dir
+C:/С++/labs3/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/С++/labs3/cmake-build-debug/CMakeFiles/rebuild_cache.dir
